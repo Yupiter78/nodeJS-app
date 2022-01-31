@@ -1,6 +1,6 @@
 {
   "name": "note-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is simple NodeJS Application",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "yuriy_yupiter <yuriy.jsx@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@types/yargs": "^17.0.8",
     "yargs": "^17.3.1"
   }
 }
