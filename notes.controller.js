@@ -5,10 +5,6 @@ const chalk = require("chalk");
 const notesPath = path.join(__dirname, "db.json");
 
 async function addNote(title) {
-    // const notes = require("./db.json");
-    // const buffer = await fs.readFile(notesPath);
-    // const notes = Buffer.from(buffer).toString("utf-8");
-
     const notes = await getNotes();
 
     const note = {
@@ -29,16 +25,21 @@ async function printNotes() {
     const notes = await getNotes();
     console.log(chalk.bgBlue("Here is the list of notes:"));
     notes.forEach((note) => {
-        console.log(
-            "title:",
-            chalk.blue(note.title),
-            "id:",
-            chalk.red(note.id)
-        );
+        console.log(chalk.red(note.id), chalk.blue(note.title));
     });
+}
+
+async function removeNote(noteId) {
+    console.log("nodeId:", noteId);
+    console.log("nodeId_type:", typeof noteId);
+    const notes = await getNotes();
+    const filteredNotes = notes.filter(({ id }) => noteId.toString() !== id);
+    console.log("filteredNotes:", filteredNotes);
+    await fs.writeFile(notesPath, JSON.stringify(filteredNotes));
 }
 
 module.exports = {
     addNote,
-    printNotes
+    printNotes,
+    removeNote
 };
