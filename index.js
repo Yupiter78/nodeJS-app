@@ -38,6 +38,7 @@ yargs.command({
         }
     },
     handler({ id }) {
+        console.log("id:", id);
         removeNote(id);
     }
 });
