@@ -1,11 +1,12 @@
 const express = require("express");
 const chalk = require("chalk");
-// const path = require("path");
+const path = require("path");
 const { addNote, getNotes } = require("./notes.controller");
 
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", "pages");
+app.use(express.static(path.resolve(__dirname, "public")));
 app.use(
     express.urlencoded({
         extended: true
@@ -18,7 +19,8 @@ app.get("/", async (req, res) => {
     // res.sendFile(path.join(basePath, "index.html"));
     res.render("index", {
         title: "Express App",
-        notes: await getNotes()
+        notes: await getNotes(),
+        created: false
     });
 });
 
@@ -27,7 +29,8 @@ app.post("/", async (req, res) => {
     // res.sendFile(path.join(basePath, "index.html"));
     res.render("index", {
         title: "Express App",
-        notes: await getNotes()
+        notes: await getNotes(),
+        created: true
     });
 });
 
