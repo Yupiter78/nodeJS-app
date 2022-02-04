@@ -1,7 +1,7 @@
 const express = require("express");
 const chalk = require("chalk");
 const path = require("path");
-const { addNote, getNotes } = require("./notes.controller");
+const { addNote, getNotes, removeNote } = require("./notes.controller");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -31,6 +31,15 @@ app.post("/", async (req, res) => {
         title: "Express App",
         notes: await getNotes(),
         created: true
+    });
+});
+
+app.delete("/:id", async (req, res) => {
+    await removeNote(req.params.id);
+    res.render("index", {
+        title: "Express App",
+        notes: await getNotes(),
+        created: false
     });
 });
 
