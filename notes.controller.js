@@ -38,6 +38,6 @@ async function removeNote(noteId) {
 
 module.exports = {
     addNote,
-    printNotes,
+    getNotes,
     removeNote
 };
