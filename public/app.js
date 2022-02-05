@@ -21,6 +21,7 @@ document.addEventListener("click", ({ target }) => {
             });
         }
     }
+    target.blur();
 });
 
 async function remove(id) {
