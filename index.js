@@ -50,7 +50,6 @@ app.delete("/:id", async (req, res) => {
 });
 
 app.put("/:id", async (req, res) => {
-    console.log("req.body.title:", req.body.title);
     const id = req.params.id;
     await updateNote(id, req.body.title);
     res.render("index", {

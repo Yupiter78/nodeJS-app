@@ -21,13 +21,13 @@ async function getNotes() {
     return Array.isArray(JSON.parse(notes)) ? JSON.parse(notes) : [];
 }
 
-async function printNotes() {
-    const notes = await getNotes();
-    console.log(chalk.bgBlue("Here is the list of notes:"));
-    notes.forEach((note) => {
-        console.log(chalk.red(note.id), chalk.blue(note.title));
-    });
-}
+// async function printNotes() {
+//     const notes = await getNotes();
+//     console.log(chalk.bgBlue("Here is the list of notes:"));
+//     notes.forEach((note) => {
+//         console.log(chalk.red(note.id), chalk.blue(note.title));
+//     });
+// }
 
 async function removeNote(noteId) {
     const notes = await getNotes();
@@ -37,12 +37,15 @@ async function removeNote(noteId) {
 }
 
 async function updateNote(noteId, newTitle) {
-    console.log("newTitle_updateNote:", newTitle);
     const notes = await getNotes();
-    const updateElemIndex = notes.findIndex(({ id }) => id === noteId);
-    notes[updateElemIndex] = { ...notes[updateElemIndex], title: newTitle };
-    console.log("notes_update:", notes);
-    await fs.writeFile(notesPath, JSON.stringify(notes));
+    const newNotes = notes.map((note) =>
+        note.id === noteId ? { ...note, title: newTitle } : note
+    );
+    // const updateElemIndex = notes.findIndex(({ id }) => id === noteId);
+    // notes[updateElemIndex] = { ...notes[updateElemIndex], title: newTitle };
+    // console.log("notes_update:", notes);
+    // console.log("newNotes_update:", newNotes);
+    await fs.writeFile(notesPath, JSON.stringify(newNotes));
     console.log(chalk.bgYellow(`Note with id: ${noteId} was update!`));
 }
 
