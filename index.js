@@ -50,8 +50,7 @@ app.delete("/:id", async (req, res) => {
 });
 
 app.put("/:id", async (req, res) => {
-    const id = req.params.id;
-    await updateNote(id, req.body.title);
+    await updateNote(req.params.id, req.body.title);
     res.render("index", {
         title: "Express App",
         notes: await getNotes(),
